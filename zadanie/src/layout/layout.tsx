@@ -9,7 +9,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 	return (
 		<div className='flex'>
 			<Sidebar />
-			<main>{children}</main>
+			<main className='w-full'>{children}</main>
 		</div>
 	);
 };

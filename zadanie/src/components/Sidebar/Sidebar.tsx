@@ -3,8 +3,8 @@ import Simplicity from '../../assets/simplicityLogo.svg';
 
 const Sidebar = () => {
 	return (
-		<div className='w-64 bg-slate-50 h-screen shadow-lg'>
-			<div className='flex items-center p-4 border-b'>
+		<div className='w-[350px] bg-slate-50 h-screen'>
+			<div className='flex items-center p-4'>
 				<img
 					src={Simplicity}
 					alt='City Logo'

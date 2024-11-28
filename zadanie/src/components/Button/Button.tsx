@@ -15,7 +15,7 @@ const Button = ({ children, disabled, htmlType, form, onClick }: Props) => {
 			onClick={onClick}
 			form={form}
 			type={htmlType}
-			className={classNames('px-5 py-3 rounded-full font-bold', {
+			className={classNames('px-5 py-3 w-fit rounded-full font-bold', {
 				'cursor-not-allowed bg-gray-400 text-white': disabled,
 				'bg-yellow-400 cursor-pointer text-black': !disabled,
 			})}

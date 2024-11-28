@@ -6,20 +6,10 @@ type Props = {
 	children: ReactNode;
 	label?: string;
 	error: ReactNode;
-	success: ReactNode;
-	helperText: ReactNode;
-	required?: boolean;
 	className?: string;
-	noBorder?: boolean;
 };
 
-const FieldWrapper = ({
-	label,
-	error,
-	children,
-	className,
-	noBorder,
-}: Props) => {
+const FieldWrapper = ({ label, error, children, className }: Props) => {
 	return (
 		<div className={className}>
 			<div className='mb-1 ml-1 font-semibold text-gray-500'>{label}</div>

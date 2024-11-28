@@ -1,4 +1,3 @@
-import React from 'react';
 import Select, { MultiValue, SingleValue } from 'react-select';
 import { useFormContext, Path, FieldValues } from 'react-hook-form';
 import FieldWrapper from '../FieldWrapper/FieldWrapper';
@@ -13,9 +12,6 @@ interface Props<T extends FieldValues> {
 	label?: string;
 	options: Option[];
 	placeholder?: string;
-	helperText?: string;
-	success?: string;
-	required?: boolean;
 	className?: string;
 	isMulti?: boolean;
 }
@@ -25,9 +21,7 @@ const InputTagField = <T extends FieldValues>({
 	label,
 	options,
 	placeholder = 'Select...',
-	helperText,
-	success,
-	required,
+
 	className,
 	isMulti = true,
 }: Props<T>) => {
@@ -44,10 +38,10 @@ const InputTagField = <T extends FieldValues>({
 			const values = (selectedOptions as MultiValue<Option>).map(
 				(option) => option.value
 			);
-			setValue(name, values as any, { shouldValidate: true }); // Explicit cast for TypeScript
+			setValue(name, values as any, { shouldValidate: true });
 		} else {
 			const value = (selectedOptions as SingleValue<Option>)?.value || null;
-			setValue(name, value as any, { shouldValidate: true }); // Explicit cast for TypeScript
+			setValue(name, value as any, { shouldValidate: true });
 		}
 	};
 
@@ -61,10 +55,7 @@ const InputTagField = <T extends FieldValues>({
 		<FieldWrapper
 			label={label}
 			className={className}
-			success={success}
 			error={errors[name]?.message as string}
-			helperText={helperText}
-			required={required}
 		>
 			<Select
 				isMulti={isMulti}

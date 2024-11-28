@@ -1,5 +1,5 @@
 import React from 'react';
-import { FieldValues, Path, useFormContext } from 'react-hook-form';
+import { useFormContext, Path, FieldValues } from 'react-hook-form';
 import classNames from 'classnames';
 import FieldWrapper from '../FieldWrapper/FieldWrapper';
 
@@ -7,9 +7,6 @@ interface Props<T extends FieldValues> {
 	name: Path<T>;
 	label?: string;
 	placeholder?: string;
-	helperText?: string;
-	success?: string;
-	required?: boolean;
 	className?: string;
 	disabled?: boolean;
 }
@@ -18,25 +15,19 @@ const DateTimeInputField = <T extends FieldValues>({
 	name,
 	label,
 	placeholder = 'Select date and time',
-	helperText,
-	success,
-	required,
 	className,
 	disabled,
 }: Props<T>) => {
 	const {
 		register,
 		formState: { errors },
-	} = useFormContext();
+	} = useFormContext<T>();
 
 	return (
 		<FieldWrapper
 			label={label}
 			className={className}
-			success={success}
 			error={errors[name]?.message as string}
-			helperText={helperText}
-			required={required}
 		>
 			<input
 				type='datetime-local'
