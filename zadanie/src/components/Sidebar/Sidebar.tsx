@@ -1,23 +1,29 @@
 import { FiVolume } from 'react-icons/fi';
-import Simplicity from '../../assets/simplicityLogo.svg';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
+	const location = useLocation();
+	const navigate = useNavigate();
+
+	const isAnnouncementRoute =
+		location.pathname === '/announcements' ||
+		location.pathname.startsWith('/announcements/');
+
 	return (
 		<div className='w-[350px] bg-slate-50 h-screen'>
 			<div className='flex items-center p-4'>
-				<img
-					src={Simplicity}
-					alt='City Logo'
-					style={{ width: '48px', height: '48px', borderRadius: '50%' }}
-				/>
-
 				<span className='ml-4 text-md font-semibold text-gray-700'>
 					Test city
 				</span>
 			</div>
 
 			<div className='mt-4'>
-				<div className='flex items-center p-4 cursor-pointer bg-yellow-100 rounded-lg mx-4'>
+				<div
+					className={`flex items-center p-4 cursor-pointer rounded-lg mx-4 ${
+						isAnnouncementRoute ? 'bg-yellow-100' : 'bg-white'
+					}`}
+					onClick={() => navigate('/announcements')}
+				>
 					<FiVolume className='w-6 h-6' />
 					<span className='ml-4 text-[15px] font-medium text-gray-700'>
 						Announcements

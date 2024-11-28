@@ -5,6 +5,7 @@ import Layout from './layout/Layout';
 import Announcements from './views/Annoucements/AnnoucemenentsList';
 import AnnouncementEdit from './views/Annoucements/AnnoucemenentsEdit/AnnouncementEdit';
 import { Announcement } from './types';
+import Home from './views/Home/Hone';
 
 function App() {
 	const [data, setData] = useState<Announcement[]>(initialData);
@@ -13,6 +14,7 @@ function App() {
 		<Router>
 			<Layout>
 				<Routes>
+					<Route path='/' element={<Home />} />
 					<Route
 						path='/announcements'
 						element={<Announcements data={data} />}
