@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-
 import { ReactNode } from 'react';
 
 type Props = {
@@ -15,12 +14,9 @@ const FieldWrapper = ({ label, error, children, className }: Props) => {
 			<div className='mb-1 ml-1 font-semibold text-gray-500'>{label}</div>
 
 			<div
-				className={classNames(
-					`rounded border-[1.5px] border-solid border-primary-20`,
-					{
-						'border-[2px] border-red-600': error,
-					}
-				)}
+				className={classNames(`rounded border-[1.5px] border-solid`, {
+					'border-[2px] border-red-600': error,
+				})}
 			>
 				{children}
 			</div>

@@ -1,17 +1,11 @@
-import React from 'react';
 import ListItem from '../ListItem/ListItem';
+import { Announcement } from '../../../../../types';
 
 interface ListProps {
-	data: {
-		id: string;
-		title: string;
-		publicationDate: string;
-		lastUpdate: string;
-		categories: string[];
-	}[];
+	data: Announcement[];
 }
 
-const List: React.FC<ListProps> = ({ data }) => {
+const List = ({ data }: ListProps) => {
 	return (
 		<div className='overflow-x-auto'>
 			<table className='min-w-full border-collapse border border-x-transparent border-t-gray-200'>
@@ -19,10 +13,10 @@ const List: React.FC<ListProps> = ({ data }) => {
 					<tr>
 						<th className='py-4 px-6 text-left text-sm font-bold'>Title</th>
 						<th className='py-4 px-6 text-left text-sm font-bold'>
-							Publication date
+							Publication Date
 						</th>
 						<th className='py-4 px-6 text-left text-sm font-bold'>
-							Last update
+							Last Update
 						</th>
 						<th className='py-4 px-6 text-left text-sm font-bold'>
 							Categories
@@ -31,15 +25,8 @@ const List: React.FC<ListProps> = ({ data }) => {
 					</tr>
 				</thead>
 				<tbody>
-					{data.map((item) => (
-						<ListItem
-							key={item.id}
-							id={item.id}
-							title={item.title}
-							publicationDate={item.publicationDate}
-							lastUpdate={item.lastUpdate}
-							categories={item.categories}
-						/>
+					{data.map((item: Announcement) => (
+						<ListItem key={item.id} {...item} />
 					))}
 				</tbody>
 			</table>

@@ -1,20 +1,14 @@
+import React from 'react';
+import { useAnnouncementStore } from '../../../store/AnnouncementStore';
 import MainLayout from '../../../layout/MainLayout';
 import List from './features/List/List';
-import { Announcement } from '../../../types';
 
-type AnnouncementsProps = {
-	data: Announcement[];
-};
+const Announcements: React.FC = () => {
+	const { data } = useAnnouncementStore();
 
-const Announcements = ({ data }: AnnouncementsProps) => {
 	const sortedData = [...data].sort((a, b) => {
 		const dateA = new Date(a.lastUpdate).getTime();
 		const dateB = new Date(b.lastUpdate).getTime();
-
-		if (isNaN(dateA) || isNaN(dateB)) {
-			return 0;
-		}
-
 		return dateB - dateA;
 	});
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFormContext, Path, FieldValues } from 'react-hook-form';
+import { FieldValues, Path, useFormContext } from 'react-hook-form';
 import classNames from 'classnames';
 import FieldWrapper from '../FieldWrapper/FieldWrapper';
 
@@ -31,14 +31,14 @@ const DateTimeInputField = <T extends FieldValues>({
 		>
 			<input
 				type='datetime-local'
-				className={classNames(
-					`h-[4vh] min-h-[45px] w-full border border-gray-300 rounded-md px-[15px] focus:outline-primary-80 focus:ring-2 focus:ring-primary-80`,
-					{
-						'cursor-not-allowed bg-gray-100 text-gray-400': disabled,
-					}
-				)}
 				placeholder={placeholder}
 				disabled={disabled}
+				className={classNames(
+					`h-[45px] w-full border-none px-[15px] rounded-md`,
+					{
+						'bg-gray-200 cursor-not-allowed': disabled,
+					}
+				)}
 				{...register(name)}
 			/>
 		</FieldWrapper>

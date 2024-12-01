@@ -11,10 +11,13 @@ const Sidebar = () => {
 
 	return (
 		<div className='w-[350px] bg-slate-50 h-screen'>
-			<div className='flex items-center p-4'>
-				<span className='ml-4 text-md font-semibold text-gray-700'>
-					Test city
-				</span>
+			<div className='flex my-4 items-center'>
+				<img
+					src='https://logos-world.net/wp-content/uploads/2020/06/Real-Madrid-Logo.png'
+					alt='City Logo'
+					className='h-[30px] w-auto'
+				/>
+				<span className='text-md font-bold text-gray-700'>Test city</span>
 			</div>
 
 			<div className='mt-4'>

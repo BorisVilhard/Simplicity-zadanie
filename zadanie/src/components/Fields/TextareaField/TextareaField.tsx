@@ -7,11 +7,8 @@ interface Props<T extends FieldValues> {
 	label?: string;
 	placeholder?: string;
 	defaultValue?: string;
-	success?: string;
-	helperText?: string;
-	border?: string;
-	required?: boolean;
 	disabled?: boolean;
+	className?: string;
 }
 
 const TextAreaField = <T extends FieldValues>(props: Props<T>) => {
@@ -23,19 +20,19 @@ const TextAreaField = <T extends FieldValues>(props: Props<T>) => {
 	return (
 		<FieldWrapper
 			label={props.label}
+			className={props.className}
 			error={errors[props.name]?.message as string}
 		>
 			<textarea
-				className={classNames(
-					`w-full align-top border-none py-[11px] px-[15px] focus:outline-primary-80 opacity-100`,
-					{
-						'text-neutral-60 bg-neutral-20 cursor-not-allowed':
-							props.disabled === true,
-					}
-				)}
 				placeholder={props.placeholder}
 				defaultValue={props.defaultValue}
 				disabled={props.disabled}
+				className={classNames(
+					`w-full h-[120px] border-none px-[15px] py-[11px] rounded-md`,
+					{
+						'bg-gray-200 cursor-not-allowed': props.disabled,
+					}
+				)}
 				{...register(props.name)}
 			/>
 		</FieldWrapper>

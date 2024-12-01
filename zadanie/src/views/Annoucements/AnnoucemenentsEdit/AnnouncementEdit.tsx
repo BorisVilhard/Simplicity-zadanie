@@ -1,31 +1,17 @@
-'use client';
-
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as zod from 'zod';
+import { useAnnouncementStore } from '../../../store/AnnouncementStore';
 import MainLayout from '../../../layout/MainLayout';
-import { Announcement } from '../../../types';
 import InputField from '../../../components/Fields/InputField/InputField';
 import DateTimeInputField from '../../../components/Fields/DateTimeInputField/DateTimeInputField';
 import InputTagField from '../../../components/Fields/InputTagField/InputTagField';
-
-import Button from '../../../components/Button/Button';
 import TextAreaField from '../../../components/Fields/TextareaField/TextareaField';
+import Button from '../../../components/Button/Button';
+import { Announcement } from '../../../types';
 import { categoryOptions } from '../../../data';
-
-interface AnnouncementEditProps {
-	data: Announcement[];
-	setData: React.Dispatch<React.SetStateAction<Announcement[]>>;
-}
-
-interface FormValues {
-	title: string;
-	publicationDate: string;
-	categories: string[];
-	content: string;
-}
 
 const schema = zod.object({
 	title: zod.string().min(1, { message: 'Title is required' }),
@@ -41,12 +27,17 @@ const schema = zod.object({
 	content: zod.string().min(1, { message: 'Content is required' }),
 });
 
-const AnnouncementEdit: React.FC<AnnouncementEditProps> = ({
-	data,
-	setData,
-}) => {
+interface FormValues {
+	title: string;
+	publicationDate: string;
+	categories: string[];
+	content: string;
+}
+
+const AnnouncementEdit = () => {
 	const { id } = useParams<{ id: string }>();
 	const navigate = useNavigate();
+	const { data, updateAnnouncement } = useAnnouncementStore();
 
 	const methods = useForm<FormValues>({
 		resolver: zodResolver(schema),
@@ -58,7 +49,9 @@ const AnnouncementEdit: React.FC<AnnouncementEditProps> = ({
 		},
 	});
 
-	const item = data.find((item) => item.id === id);
+	const item: Announcement | undefined = data.find(
+		(item: Announcement) => item.id === id
+	);
 
 	useEffect(() => {
 		if (item) {
@@ -73,34 +66,24 @@ const AnnouncementEdit: React.FC<AnnouncementEditProps> = ({
 		}
 	}, [item, methods]);
 
-	const onSubmit: SubmitHandler<FormValues> = (dataForm) => {
-		const updatedData = data.map((d) => {
-			if (d.id === id) {
-				return {
-					...d,
-					...dataForm,
-					lastUpdate: new Date().toISOString(),
-				};
-			}
-			return d;
-		});
-		setData(updatedData);
-		navigate('/announcements');
+	const onSubmit: SubmitHandler<FormValues> = (formData) => {
+		if (id) {
+			updateAnnouncement(id, formData);
+			navigate('/announcements');
+		}
 	};
 
 	if (!item) {
-		return (
-			<MainLayout title='Edit Announcement'>
-				<div className='p-4 text-center text-red-500'>Item not found</div>
-			</MainLayout>
-		);
+		return <MainLayout title='Edit Announcement'>Item not found</MainLayout>;
 	}
+
+	const isFormDirty = Object.keys(methods.formState.dirtyFields).length > 0;
 
 	return (
 		<MainLayout title='Edit Announcement'>
 			<FormProvider {...methods}>
 				<form
-					className='flex  w-[40vw] max-w-lg flex-col gap-4'
+					className='flex flex-col gap-4'
 					onSubmit={methods.handleSubmit(onSubmit)}
 				>
 					<InputField name='title' label='Title' placeholder='Enter title' />
@@ -111,17 +94,19 @@ const AnnouncementEdit: React.FC<AnnouncementEditProps> = ({
 					/>
 					<InputTagField
 						name='categories'
-						label='Category'
+						label='Categories'
 						options={categoryOptions}
-						placeholder='Select category'
+						placeholder='Select categories'
 					/>
 					<DateTimeInputField
 						name='publicationDate'
-						label='Publication date'
+						label='Publication Date'
 						placeholder='Select date and time'
 					/>
-					<div className='w-full flex justify-end'>
-						<Button htmlType='submit'>Publish</Button>
+					<div className='flex justify-end'>
+						<Button htmlType='submit' disabled={!isFormDirty}>
+							Publish
+						</Button>
 					</div>
 				</form>
 			</FormProvider>

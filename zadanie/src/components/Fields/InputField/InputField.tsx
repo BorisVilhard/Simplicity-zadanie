@@ -26,10 +26,9 @@ const InputField = <T extends FieldValues>(props: Props<T>) => {
 		>
 			<input
 				className={classNames(
-					`h-[4vh] min-h-[45px] w-full border-none px-[15px] opacity-100 focus:outline-primary-80`,
+					` h-[45px] w-full border-none px-[15px] opacity-100`,
 					{
-						'cursor-not-allowed bg-neutral-20 text-neutral-60':
-							props.disabled === true,
+						'cursor-not-allowed bg-gray-200': props.disabled === true,
 					}
 				)}
 				type={props.type}

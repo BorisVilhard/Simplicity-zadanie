@@ -5,7 +5,7 @@ interface MainLayoutProps {
 	title: string;
 }
 
-const MainLayout: React.FC<MainLayoutProps> = ({ children, title }) => {
+const MainLayout = ({ children, title }: MainLayoutProps) => {
 	return (
 		<div className='w-full'>
 			<div className='bg-gray-300 my-[70px] w-full h-[1.5px]'></div>

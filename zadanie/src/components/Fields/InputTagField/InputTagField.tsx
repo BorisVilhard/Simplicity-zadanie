@@ -70,6 +70,7 @@ const InputTagField = <T extends FieldValues>({
 						...base,
 						border: 'none',
 						boxShadow: 'none',
+						height: '45px',
 					}),
 				}}
 			/>
