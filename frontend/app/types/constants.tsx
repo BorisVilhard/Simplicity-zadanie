@@ -8,3 +8,10 @@ export const SIDEBAR_PAGES: SideBarItemValue[] = [
 		url: '/Announcements',
 	},
 ];
+
+export const TABLE_COLUMNS = [
+	'Title',
+	'Publication date',
+	'Last update',
+	'Categories',
+];

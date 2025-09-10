@@ -1,6 +1,5 @@
 'use client';
-import { useReducer, ReactNode } from 'react';
-import type { Metadata } from 'next';
+import { useReducer, ReactNode, useEffect } from 'react';
 import './globals.css';
 import { geistMono, geistSans, lato } from './styles/Fonts';
 import { AnnouncementReducer } from './context/Reducer';
@@ -15,7 +14,17 @@ export default function RootLayout({
 }: Readonly<{
 	children: ReactNode;
 }>) {
-	const [state, dispatch] = useReducer(AnnouncementReducer, initialState);
+	const loadedState =
+		typeof window !== 'undefined' && localStorage.getItem('announcements')
+			? JSON.parse(localStorage.getItem('announcements')!)
+			: initialState;
+
+	const [state, dispatch] = useReducer(AnnouncementReducer, loadedState);
+
+	// Mimickovanie databazy cez local storage
+	useEffect(() => {
+		localStorage.setItem('announcements', JSON.stringify(state));
+	}, [state]);
 
 	return (
 		<html lang='en'>
@@ -24,7 +33,11 @@ export default function RootLayout({
 			>
 				<AnnouncementContext.Provider value={{ state, dispatch }}>
 					<div className='flex'>
-						<Sidebar /> {children}
+						<Sidebar />
+						<div className='w-full mx-8'>
+							<div className='h-0.5 w-full my-[8vh] bg-neutral-light' />
+							{children}
+						</div>
 					</div>
 				</AnnouncementContext.Provider>
 			</body>

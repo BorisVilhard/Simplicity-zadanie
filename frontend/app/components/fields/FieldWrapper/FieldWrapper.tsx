@@ -17,7 +17,6 @@ const FieldWrapper = ({ label, error, children, noBorder }: Props) => {
 			</div>
 			<div
 				className={classNames(`rounded`, {
-					'border-2 border-error-dark': error,
 					'border-none': noBorder,
 					'border-2 border-solid border-neutral-light': !noBorder,
 				})}

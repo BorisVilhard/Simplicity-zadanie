@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
-
 export interface RowValue {
 	title: string;
+	content: string;
+	categories: string[];
 	publicationDate: string;
 	lastUpdate: string;
-	categories: string | string[];
 }
 
 export interface AnnouncementState {
