@@ -97,7 +97,7 @@ const AnnouncementForm = ({ id }: Props) => {
 		<FormProvider {...methods}>
 			<form
 				onSubmit={handleSubmit(onSubmit, onInvalid)}
-				className='space-y-6 max-w-[40vw] mx-auto'
+				className='space-y-6 w-full md:max-w-[40vw] mx-auto'
 			>
 				<h1 className='text-2xl font-[900]'>Edit Announcements</h1>
 				<InputField<AnnouncementFormValues>
