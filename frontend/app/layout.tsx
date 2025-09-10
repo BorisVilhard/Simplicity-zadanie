@@ -34,9 +34,9 @@ export default function RootLayout({
 				<AnnouncementContext.Provider value={{ state, dispatch }}>
 					<div className='flex'>
 						<Sidebar />
-						<div className='w-full mx-8'>
+						<div className='w-full'>
 							<div className='h-0.5 w-full my-[8vh] bg-neutral-light' />
-							{children}
+							<div className='mx-8'>{children}</div>
 						</div>
 					</div>
 				</AnnouncementContext.Provider>

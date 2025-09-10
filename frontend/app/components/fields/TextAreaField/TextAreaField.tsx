@@ -39,12 +39,17 @@ const TextAreaField = <T extends FieldValues>({
 	const fieldError = error || (errors[name] as FieldError | undefined);
 
 	return (
-		<FieldWrapper label={label} error={fieldError?.message} required={required}>
+		<FieldWrapper
+			noBorder
+			label={label}
+			error={fieldError?.message}
+			required={required}
+		>
 			<textarea
 				{...register}
 				data-qa='textarea'
 				className={classNames(
-					'w-full field border-none field-textarea resize-y rounded-md focus:outline-primary-dark',
+					'w-full field border-2 border-solid border-neutral-light field-textarea resize-y rounded-md focus:border-primary-dark',
 					{
 						'cursor-not-allowed bg-neutral-light text-neutral-dark': disabled,
 					},

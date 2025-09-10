@@ -9,6 +9,11 @@ export const SIDEBAR_PAGES: SideBarItemValue[] = [
 	},
 ];
 
+export const CATEGORY_ITEMS = [
+	{ label: 'City', value: 'city' },
+	{ label: 'Community events', value: 'community_events' },
+];
+
 export const TABLE_COLUMNS = [
 	'Title',
 	'Publication date',

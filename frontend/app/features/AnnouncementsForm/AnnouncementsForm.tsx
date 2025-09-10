@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation';
 import Header from '@/app/components/Header/Header';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { CATEGORY_ITEMS } from '@/app/types/constants';
 
 interface AnnouncementFormValues {
 	title: string;
@@ -27,11 +28,6 @@ const announcementSchema = z.object({
 	publicationDate: z.string().min(1, 'Pole je povinne'),
 });
 
-const categoryItems = [
-	{ label: 'City', value: 'city' },
-	{ label: 'Community events', value: 'community_events' },
-];
-
 interface Props {
 	id?: string;
 }
@@ -39,6 +35,7 @@ interface Props {
 const AnnouncementForm = ({ id }: Props) => {
 	const { state, dispatch } = useContext(AnnouncementContext)!;
 	const router = useRouter();
+	// Kontrolujeme ci ide o form pre editovanie alebo vytvaranie noveho formulara
 	const isEdit = id !== 'new' && !!id;
 	const index = isEdit ? parseInt(id!) : undefined;
 	const existing = index !== undefined ? state.items[index] : undefined;
@@ -93,7 +90,7 @@ const AnnouncementForm = ({ id }: Props) => {
 	};
 
 	const onInvalid = () => {
-		alert('Pole je povinne');
+		alert('Vsetky polia su povinne.');
 	};
 
 	return (
@@ -122,7 +119,7 @@ const AnnouncementForm = ({ id }: Props) => {
 					/>
 					<MultiSelectField<AnnouncementFormValues>
 						name='categories'
-						items={categoryItems}
+						items={CATEGORY_ITEMS}
 						required
 					/>
 				</div>
