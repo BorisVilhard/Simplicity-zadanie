@@ -12,8 +12,9 @@
 }
 
 @theme {
+	--color-sidebar-background: oklch(0.983 0 0);
 	--color-warning-dark: oklch(0.7778 0.1552 83.26);
-	--color-warning-light: oklch(0.99 0.012 90);
+	--color-warning-light: oklch(0.9893 0.039 107.09);
 	--color-error-dark: oklch(0.5 0.2 25);
 	--color-neutral-light: oklch(0.85 0 0);
 	--color-neutral-medium: oklch(0.5 0 0);
