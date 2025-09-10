@@ -1,6 +1,12 @@
+import { useReducer, ReactNode } from 'react';
 import type { Metadata } from 'next';
 import './globals.css';
 import { geistMono, geistSans, lato } from './styles/Fonts';
+import { AnnouncementReducer } from './context/Reducer';
+import {
+	AnnouncementContext,
+	initialState,
+} from './context/AnnouncementContext';
 
 export const metadata: Metadata = {
 	title: 'Simplicity',
@@ -10,14 +16,18 @@ export const metadata: Metadata = {
 export default function RootLayout({
 	children,
 }: Readonly<{
-	children: React.ReactNode;
+	children: ReactNode;
 }>) {
+	const [state, dispatch] = useReducer(AnnouncementReducer, initialState);
+
 	return (
 		<html lang='en'>
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} ${lato.variable} antialiased`}
 			>
-				{children}
+				<AnnouncementContext.Provider value={{ state, dispatch }}>
+					{children}
+				</AnnouncementContext.Provider>
 			</body>
 		</html>
 	);
