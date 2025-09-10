@@ -18,6 +18,8 @@ export const AnnouncementReducer = (
 			return {
 				items: state.items.filter((_, i) => i !== action.payload.index),
 			};
+		case 'LOAD':
+			return action.payload;
 		default:
 			return state;
 	}

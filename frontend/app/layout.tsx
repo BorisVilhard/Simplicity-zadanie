@@ -14,14 +14,16 @@ export default function RootLayout({
 }: Readonly<{
 	children: ReactNode;
 }>) {
-	const loadedState =
-		typeof window !== 'undefined' && localStorage.getItem('announcements')
-			? JSON.parse(localStorage.getItem('announcements')!)
-			: initialState;
+	const [state, dispatch] = useReducer(AnnouncementReducer, initialState);
 
-	const [state, dispatch] = useReducer(AnnouncementReducer, loadedState);
+	// Pridali sme LOAD action aby sme neposielali do localstorage prazdne data, teda pri renderi nam zabezbecuje konzistentny stav
+	useEffect(() => {
+		const stored = localStorage.getItem('announcements');
+		if (stored) {
+			dispatch({ type: 'LOAD', payload: JSON.parse(stored) });
+		}
+	}, []);
 
-	// Mimickovanie databazy cez local storage
 	useEffect(() => {
 		localStorage.setItem('announcements', JSON.stringify(state));
 	}, [state]);
